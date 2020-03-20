@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+     <meta name="viewport" content="width=device-width" />
+     <title>Наш кинотеатр | @ViewBag.Title</title>
+
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" type="text/css">
+     @Styles.Render("~/bundles/bootstrap/css")
+     @Styles.Render("~/bundles/mdbootstrap/css")
+     @Styles.Render("~/bundles/style/css")
+
+
+     @if (IsSectionDefined("Styles"))
+     {@RenderSection("Styles", required: false)}
+</head>
+<body>
+     @Html.Partial("_Navbar")
+     <main>
+          @RenderBody()
+     </main>
+     @Html.Partial("_Footer")
+     @Scripts.Render("~bundles/jquery/js")
+     @Scripts.Render("~bundles/popper/js")
+     @Scripts.Render("~bundles/bootstrap/js")
+     @Scripts.Render("~bundles/mdbootstrap/js")
+     @Scripts.Render("~bundles/main/js")
+
+</body>
+</html>
