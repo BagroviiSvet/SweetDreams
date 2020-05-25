@@ -41,24 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\AdminAPI.cs" />
+    <Compile Include="API\API.cs" />
+    <Compile Include="API\CinemaAPI.cs" />
+    <Compile Include="API\UserAPI.cs" />
     <Compile Include="BusinessLogic.cs" />
-    <Compile Include="Core\UserApi.cs" />
-    <Compile Include="Interfaces\IMain.cs" />
-    <Compile Include="Interfaces\ISession.cs" />
-    <Compile Include="LogicBL\MainBL.cs" />
-    <Compile Include="LogicBL\SessionBL.cs" />
+    <Compile Include="DataTransfer\FilmDTO.cs" />
+    <Compile Include="DataTransfer\ShowDTO.cs" />
+    <Compile Include="DataTransfer\TicketDTO.cs" />
+    <Compile Include="DataTransfer\UserDTO.cs" />
+    <Compile Include="Infrostructure\ResultMsg.cs" />
+    <Compile Include="Interfaces\IAdminAPI.cs" />
+    <Compile Include="Interfaces\ICinemaAPI.cs" />
+    <Compile Include="Interfaces\IUserAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\SweetDreams.Helper\SweetDreams.Helper.csproj">
-      <Project>{208bfb5a-3830-4a49-b4d5-c792d9aacbe1}</Project>
-      <Name>SweetDreams.Helper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SweetDreams.Models\SweetDreams.Models.csproj">
-      <Project>{e281c6e1-ebeb-4435-972a-7f17e85d550e}</Project>
-      <Name>SweetDreams.Models</Name>
+    <ProjectReference Include="..\SweetDreams.DAL\SweetDreams.DAL.csproj">
+      <Project>{2081f877-be76-4d24-b99e-daa8a592cbf7}</Project>
+      <Name>SweetDreams.DAL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

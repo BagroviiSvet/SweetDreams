@@ -1,0 +1,38 @@
+﻿@model SweetDreams.Web.Models.FilmPageModel
+@{
+     Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+     ViewBag.Title = Model.Film.Name;
+}
+<p style="padding-top:60px">
+     @Model.Film.Name
+</p>
+<p>
+     @Html.ActionLink("Добавить сеанс", "AddShow", new { @filmId = Model.Film.Id })
+</p>
+<table class="table">
+     <tr>
+          <th>
+               День
+          </th>
+          <th>
+               Время
+          </th>
+          <th></th>
+     </tr>
+
+     @foreach (var item in Model.Film.Shows)
+     {
+          <tr>
+               <td>
+                    @Html.Raw(item.Date.ToString(@"dd\.mm\.yy"))
+               </td>
+               <td>
+                    @Html.Raw(item.Time.ToString(@"hh\:mm"))
+               </td>
+               <td>
+                    @Html.ActionLink("Удалить сеанс", "RemoveShow", new { @showId = item.Id, @filmId = Model.Film.Id })
+               </td>
+          </tr>
+     }
+
+</table>

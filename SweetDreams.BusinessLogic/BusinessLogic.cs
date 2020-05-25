@@ -1,5 +1,7 @@
-﻿using SweetDreams.BusinessLogic.Interfaces;
-using SweetDreams.BusinessLogic.LogicBL;
+﻿using SweetDreams.BusinessLogic.API;
+using SweetDreams.BusinessLogic.Interfaces;
+using SweetDreams.DAL.Interfaces;
+using SweetDreams.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +12,41 @@ namespace SweetDreams.BusinessLogic
 {
      public class BusinessLogic
      {
-          public ISession GetSessionBL()
-          {
-               return new SessionBL();
-          }
+          readonly IUnitOfWork Database;
 
-          public IMain GetMainBL()
+          public BusinessLogic()
           {
-               return new MainBL();
+               Database = new UnitOfWork("FilmContext");
+          }
+          IUserAPI userAPI;
+          public IUserAPI UserAPI
+          {
+               get
+               {
+                    if (userAPI == null)
+                         userAPI = new UserAPI(Database);
+                    return userAPI;
+               }
+          }
+          ICinemaAPI cinemaAPI;
+          public ICinemaAPI CinemaAPI
+          {
+               get
+               {
+                    if (cinemaAPI == null)
+                         cinemaAPI = new CinemaAPI(Database);
+                    return cinemaAPI;
+               }
+          }
+          IAdminAPI adminAPI;
+          public IAdminAPI AdminAPI
+          {
+               get
+               {
+                    if (adminAPI == null)
+                         adminAPI = new AdminAPI(Database);
+                    return adminAPI;
+               }
           }
      }
 }

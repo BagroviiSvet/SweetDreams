@@ -11,6 +11,7 @@
      @Styles.Render("~/bundles/bootstrap/css")
      @Styles.Render("~/bundles/mdbootstrap/css")
      @Styles.Render("~/bundles/style/css")
+     @Styles.Render("~/bundles/fa/css")
 
 
      @if (IsSectionDefined("Styles"))
@@ -22,11 +23,16 @@
           @RenderBody()
      </main>
      @Html.Partial("_Footer")
-     @Scripts.Render("~bundles/jquery/js")
-     @Scripts.Render("~bundles/popper/js")
-     @Scripts.Render("~bundles/bootstrap/js")
-     @Scripts.Render("~bundles/mdbootstrap/js")
-     @Scripts.Render("~bundles/main/js")
+     <iframe allowfullscreen class="video" id="videoAlita" width="800" height="600"
+             src="">
+     </iframe>
+
+     <div class="background"></div>
+     @Scripts.Render("~/bundles/jquery")
+     @Scripts.Render("~/bundles/popper/js")
+     @Scripts.Render("~/bundles/bootstrap/js")
+     @Scripts.Render("~/bundles/mdbootstrap/js")
+     @Scripts.Render("~/bundles/main/js")
 
 </body>
 </html>

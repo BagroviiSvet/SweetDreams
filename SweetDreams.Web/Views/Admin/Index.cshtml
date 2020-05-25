@@ -1,0 +1,36 @@
+﻿@model SweetDreams.Web.Models.AdminPageModel
+@{
+     Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+     ViewBag.Title = "Панель админа";
+}
+<p style="padding-top:60px">
+     @Html.ActionLink("Добавить фильм", "AddFilm")
+</p>
+<table class="table">
+     <tr>
+          <th>
+               Название
+          </th>
+          <th>
+               Длительность
+          </th>
+          <th></th>
+     </tr>
+
+     @foreach (var item in Model.Films)
+     {
+          <tr>
+               <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+               </td>
+               <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+               </td>
+               <td>
+                    @Html.ActionLink("Сеансы", "Film", new { @filmId = item.Id }) |
+                    @Html.ActionLink("Удалить фильм", "RemoveFilm", new { @filmId = item.Id })
+               </td>
+          </tr>
+     }
+
+</table>

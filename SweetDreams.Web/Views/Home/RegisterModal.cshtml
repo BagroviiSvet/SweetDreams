@@ -1,0 +1,66 @@
+﻿@model SweetDreams.Web.Models.RegisterModel
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+     @Html.AntiForgeryToken()
+
+     <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="modal-header text-center">
+                         <h4 class="modal-title w-100 font-weight-bold">ВХОД</h4>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                         </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                         <div class="md-form mb-5">
+                              <i class="fas fa-envelope prefix grey-text"></i>
+                              @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { id = "defaultForm-email", @class = "form-control validate" } })
+                              @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+                              @*<input type="email" id="defaultForm-email" class="form-control validate">*@
+                              <label data-error="wrong" data-success="right" for="defaultForm-email">Впишите e-mail*</label>
+                         </div>
+
+                         <div class="md-form mb-5">
+                              <i class="fas fa-user prefix grey-text"></i>
+                              @Html.EditorFor(model => model.Name, new { htmlAttributes = new { id = "defaultForm-name", @class = "form-control validate" } })
+                              @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                              <label data-error="wrong" data-success="right" for="defaultForm-name">Впишите Name*</label>
+                         </div>
+
+                         <div class="md-form mb-5">
+                              <i class="fas fa-phone prefix grey-text"></i>
+                              @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { id = "defaultForm-phone", @class = "form-control validate" } })
+                              @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                              <label data-error="wrong" data-success="right" for="defaultForm-name">Впишите номер телефона*</label>
+                         </div>
+
+                         <div class="md-form mb-4">
+                              <i class="fas fa-lock prefix grey-text"></i>
+                              @Html.EditorFor(model => model.Password, new { htmlAttributes = new { id = "defaultForm-pass", @class = "form-control validate" } })
+                              @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                              @*<input type="password" id="defaultForm-pass" class="form-control validate">*@
+                              <label data-error="wrong" data-success="right" for="defaultForm-pass">Текущий пароль*</label>
+                         </div>
+
+                         <div class="md-form mb-4">
+                              <i class="fas fa-lock prefix grey-text"></i>
+                              @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { id = "defaultForm-pass", @class = "form-control validate" } })
+                              @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                              <label data-error="wrong" data-success="right" for="defaultForm-pass">Подтвердите пароль*</label>
+                         </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                         <button type="submit" class="btn btn-warning">Войти</button>
+                    </div>
+               </div>
+          </div>
+     </div>
+}

@@ -1,0 +1,84 @@
+﻿@model SweetDreams.Web.Models.FilmPageModel
+@using SweetDreams.BusinessLogic.DataTransfer;
+@{
+     ViewBag.Title = "Film";
+     Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+     var imageUrl = string.Format($"/img/{Model.Film.Id}.jpg");
+     var days = new SortedDictionary<DateTime, SortedSet<ShowDTO>>();
+          foreach (var show in Model.Film.Shows)
+     {
+          if (days.TryGetValue(show.Date, out SortedSet<ShowDTO> set))
+          {
+               set.Add(show);
+          }
+          else
+          {
+               days.Add(show.Date, new SortedSet<ShowDTO> { show });
+          }
+     }
+}
+
+<main style="background-color: #191919; border-bottom: solid 2px; min-height:100%; padding-bottom: 10px">
+     <div class="container" id="cf" style="background-color: #191919; padding-top: 20px;">
+          <div class="row" style="padding-top:60px; margin-left: 14px">
+               <p style="color: #d3d3d3">
+                    <a href="@Url.Action("Index", "Home")"
+                       style="color:#FFBD0F;text-decoration: underline; padding-left: 3px">Главная </a> > <a href="@string.Format($"{@Url.Action("Index", "Home")}#filmes")" style="color:#FFBD0F;text-decoration: underline; padding-left: 3px;">
+                         Фильмы
+                    </a> > @Model.Film.Name
+               </p>
+          </div>
+          <div class="row" style="height: 100%;">
+               <div class="col-lg-3 col-sm-5">
+                    <div class="row">
+                         <div class="col-12">
+                              <img class="img-fluid" src="@imageUrl" alt="Not found">
+                         </div>
+                         <div class="col-12" style="color:#8A8A8A">
+                              <button src="@Model.Film.TrailerUrl" type="button"
+                                      class=" btn knopka btn-light waves-effect btn-sm "
+                                      style="width:100%; height: 50px; font-size: 24px; margin: 0">
+                                   Трейлер
+                              </button>
+
+                         </div>
+                    </div>
+               </div>
+               <div class="col-lg-9 col-sm-7">
+                    <div class="row" style="border:0; width: 100%; font-size: 36px; font-weight: 900; color: #FFFFFF">
+                         <div class="col-12">
+                              @Model.Film.Name (RU)
+                         </div>
+                         <div class="col-lg-9 col-12">
+                              <div class="flex-row">
+                                   <div style=" font-weight: 500; font-size: 30px; color: #d3d3d3; border-bottom: 1px dashed rgba(255,255, 255, 0.1); margin-bottom: 25px;">
+                                        Cеансы:<br>
+                                        @foreach (var day in days)
+                                        {
+                                             @Html.Raw(day.Key.ToString(@"dd\.mm\.yy") + ": ");
+                                             var set = day.Value;
+                                             foreach (var show in day.Value)
+                                             {
+                                                  var time = show.Time;
+                                                  @Html.Raw(time.ToString(@"hh\:mm"));
+                                                  if (show != set.Last())
+                                                  {
+                                                       @Html.Raw(", ");
+                                                  }
+                                             }
+                                             <br />
+                                        }
+                                   </div>
+
+
+                              </div>
+
+
+                         </div>
+
+
+                    </div>
+               </div>
+          </div>
+     </div>
+</main>
