@@ -8,7 +8,6 @@ namespace SweetDreams.Web.Models
 {
      public class FilmModel : NavbarModel
      {
-          public int Id { get; set; }
           [Required]
           public string Name { get; set; }
           [Required]

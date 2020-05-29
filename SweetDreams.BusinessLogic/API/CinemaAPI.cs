@@ -38,7 +38,23 @@ namespace SweetDreams.BusinessLogic.API
                {
                     Id = show.Id,
                     Time = show.Time,
-                    Date = show.Date
+                    Date = show.Date,
+                    Price = show.Price,
+                    Film = new FilmDTO { Id = show.Film.Id, Duration = show.Film.Duration, Name = show.Film.Name, TrailerUrl = show.Film.TrailerUrl },
+                    Tickets = show.Tickets.ToList().ConvertAll(ConvertToDTO)
+               };
+          }
+          static TicketDTO ConvertToDTO(Ticket ticket)
+          {
+               if (ticket == null)
+                    return null;
+               return new TicketDTO
+               {
+                    Id = ticket.Id,
+                    Row = ticket.Row,
+                    Seat = ticket.Seat,
+                    Show = new ShowDTO { Id = ticket.Show.Id, Date = ticket.Show.Date, Price = ticket.Show.Price, Time = ticket.Show.Time },
+                    IsTaken = ticket.User != null
                };
           }
           public List<FilmDTO> GetAllFilms()

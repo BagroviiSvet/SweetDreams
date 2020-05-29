@@ -11,6 +11,7 @@ namespace SweetDreams.BusinessLogic.DataTransfer
           public int Id { get; set; }
           public int Row { get; set; }
           public int Seat { get; set; }
-          public decimal Price { get; set; }
+          public ShowDTO Show { get; set; }
+          public bool IsTaken { get; set; }
      }
 }

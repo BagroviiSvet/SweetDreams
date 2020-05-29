@@ -13,7 +13,7 @@ namespace SweetDreams.Web.Controllers
           // GET: AboutUs
           public ActionResult Index()
           {
-               var model = new NavbarModel { User = UserAPI.GetUser(User.Identity.Name) };
+               var model = new NavbarModel { User = LoggedUser };
                return View(model);
           }
      }

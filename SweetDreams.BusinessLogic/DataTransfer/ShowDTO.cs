@@ -12,7 +12,9 @@ namespace SweetDreams.BusinessLogic.DataTransfer
           public int Id { get; set; }
           public DateTime Date { get; set; }
           public TimeSpan Time { get; set; }
-
+          public decimal Price { get; set; }
+          public FilmDTO Film { get; set; }
+          public IEnumerable<TicketDTO> Tickets { get; set; }
           public int CompareTo(ShowDTO other)
           {
                return Time.CompareTo(other.Time);

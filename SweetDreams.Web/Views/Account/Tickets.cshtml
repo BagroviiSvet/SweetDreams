@@ -1,0 +1,46 @@
+﻿@model SweetDreams.Web.Models.NavbarModel
+
+@{
+     ViewBag.Title = "Tickets";
+     Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+}
+
+<br />
+<br />
+<h2>Ваши билеты</h2>
+
+<table class="table">
+     <tr>
+          <th>
+               Фильм
+          </th>
+          <th>
+               Время
+          </th>
+          <th>
+               Ряд
+          </th>
+          <th>
+               Место
+          </th>
+     </tr>
+
+     @foreach (var item in Model.User.Tickets)
+     {
+          <tr>
+               <td>
+                    @Html.DisplayFor(modelItem => item.Show.Film.Name)
+               </td>
+               <td>
+                    @string.Format("{0} {1}", item.Show.Date.ToString(@"dd\.mm\.yy"), item.Show.Time.ToString(@"hh\:mm"))
+               </td>
+               <td>
+                    @(item.Row+1)
+               </td>
+               <td>
+                    @(item.Seat+1)
+               </td>
+          </tr>
+     }
+
+</table>

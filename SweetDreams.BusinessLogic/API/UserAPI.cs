@@ -1,4 +1,4 @@
-﻿     using SweetDreams.BusinessLogic.DataTransfer;
+﻿using SweetDreams.BusinessLogic.DataTransfer;
 using SweetDreams.BusinessLogic.Infrostructure;
 using SweetDreams.BusinessLogic.Interfaces;
 using SweetDreams.DAL.Entities;
@@ -18,18 +18,23 @@ namespace SweetDreams.BusinessLogic.API
           {
           }
 
-          public ResultMsg BuyTicket(UserDTO userDTO, int ticketId)
+          public ResultMsg BuyTicket(UserDTO userDTO, IEnumerable<int> ticketIds)
           {
                User user = Database.Users.Find(u => u.Mail == userDTO.Mail).FirstOrDefault();
-               var ticket = Database.Tickets.Get(ticketId);
-               if (ticket.User != null)
-                    return new ResultMsg { Succeeded = false, Error = "Ticket is already bought", Reason = "" };
-               else
+               var tickets = new List<Ticket>();
+               foreach (var ticketId in ticketIds)
+               {
+                    var ticket = Database.Tickets.Get(ticketId);
+                    if (ticket.User != null)
+                         return new ResultMsg { Succeeded = false, Error = "Ticket is already bought" };
+                    tickets.Add(ticket);
+               }
+               foreach (var ticket in tickets)
                {
                     user.Tickets.Add(ticket);
                     Database.Save();
-                    return new ResultMsg { Succeeded = true };
                }
+               return new ResultMsg { Succeeded = true };
           }
 
           public ResultMsg Login(UserDTO userDTO)
@@ -92,9 +97,31 @@ namespace SweetDreams.BusinessLogic.API
                };
           }
 
-          static TicketDTO ConvertToDTO(Ticket ticket)
+          internal static TicketDTO ConvertToDTO(Ticket ticket)
           {
-               return new TicketDTO { Id = ticket.Id, Price = ticket.Price, Row = ticket.Row, Seat = ticket.Seat };
+               if (ticket == null)
+                    return null;
+               return new TicketDTO
+               {
+                    Id = ticket.Id,
+                    Row = ticket.Row,
+                    Seat = ticket.Seat,
+                    Show = new ShowDTO
+                    {
+                         Id = ticket.Show.Id,
+                         Date = ticket.Show.Date,
+                         Price = ticket.Show.Price,
+                         Time = ticket.Show.Time,
+                         Film = new FilmDTO
+                         {
+                              Id = ticket.Show.Film.Id,
+                              Duration = ticket.Show.Film.Duration,
+                              Name = ticket.Show.Film.Name,
+                              TrailerUrl = ticket.Show.Film.TrailerUrl
+                         }
+                    },
+                    IsTaken = ticket.User != null
+               };
           }
 
           public UserDTO GetUser(string mail)

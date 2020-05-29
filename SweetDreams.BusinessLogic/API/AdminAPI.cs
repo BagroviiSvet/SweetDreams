@@ -31,7 +31,15 @@ namespace SweetDreams.BusinessLogic.API
           public void AddShow(int filmId, ShowDTO showDTO)
           {
                var film = Database.Films.Get(filmId);
-               film.Shows.Add(new Show { Time = showDTO.Time, Date = showDTO.Date });
+               var show = new Show { Time = showDTO.Time, Date = showDTO.Date, Price = showDTO.Price };
+               for (int row = 0; row < 14; row++)
+               {
+                    for (int seat = 0; seat < 10; seat++)
+                    {
+                         show.Tickets.Add(new Ticket { Row = row, Seat = seat, Show = show });
+                    }
+               }
+               film.Shows.Add(show);
                Database.Save();
           }
 

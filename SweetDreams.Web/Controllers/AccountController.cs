@@ -56,5 +56,11 @@ namespace SweetDreams.Web.Controllers
                FormsAuthentication.SignOut();
                return RedirectToAction("Index", "Home");
           }
+          [Authorize]
+          public ActionResult Tickets()
+          {
+               var model = new NavbarModel { User = LoggedUser };
+               return View(model);
+          }
      }
 }

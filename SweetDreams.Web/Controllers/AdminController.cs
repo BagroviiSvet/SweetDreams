@@ -15,21 +15,21 @@ namespace SweetDreams.Web.Controllers
           [Admin]
           public ActionResult Index()
           {
-               var model = new AdminPageModel { User = UserAPI.GetUser(User.Identity.Name), Films = CinemaAPI.GetAllFilms() };
+               var model = new AdminPageModel { User = LoggedUser, Films = CinemaAPI.GetAllFilms() };
                return View(model);
           }
           [HttpGet]
           [Admin]
           public ActionResult Film(int filmId)
           {
-               var model = new FilmPageModel { Film = CinemaAPI.GetFilm(filmId), User = UserAPI.GetUser(User.Identity.Name) };
+               var model = new FilmPageModel { Film = CinemaAPI.GetFilm(filmId), User = LoggedUser };
                return View(model);
           }
           [HttpGet]
           [Admin]
           public ActionResult AddFilm()
           {
-               var model = new FilmModel { User = UserAPI.GetUser(User.Identity.Name) };
+               var model = new FilmModel { User = LoggedUser };
                return View(model);
           }
           [HttpPost]
@@ -55,17 +55,16 @@ namespace SweetDreams.Web.Controllers
           [Admin]
           public ActionResult AddShow(int filmId)
           {
-               var model = new ShowModel { User = UserAPI.GetUser(User.Identity.Name), Film = CinemaAPI.GetFilm(filmId) };
+               var model = new ShowModel { User = LoggedUser, Film = CinemaAPI.GetFilm(filmId) };
                return View(model);
           }
           [HttpPost]
           [Admin]
           public ActionResult AddShow(ShowModel model, int filmId)
           {
-
                if (ModelState.IsValid)
                {
-                    AdminAPI.AddShow(filmId, new ShowDTO { Time = model.Time, Date = model.Date });
+                    AdminAPI.AddShow(filmId, new ShowDTO { Time = model.Time, Date = model.Date, Price=model.Price });
                     return RedirectToAction("Film", new { filmId });
                }
                model.Film = CinemaAPI.GetFilm(filmId);

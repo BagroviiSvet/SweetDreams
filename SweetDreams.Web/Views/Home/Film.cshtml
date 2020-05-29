@@ -5,7 +5,7 @@
      Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
      var imageUrl = string.Format($"/img/{Model.Film.Id}.jpg");
      var days = new SortedDictionary<DateTime, SortedSet<ShowDTO>>();
-          foreach (var show in Model.Film.Shows)
+     foreach (var show in Model.Film.Shows)
      {
           if (days.TryGetValue(show.Date, out SortedSet<ShowDTO> set))
           {
@@ -60,7 +60,7 @@
                                              foreach (var show in day.Value)
                                              {
                                                   var time = show.Time;
-                                                  @Html.Raw(time.ToString(@"hh\:mm"));
+                                                  @Html.ActionLink(time.ToString(@"hh\:mm"), "Show", new { @showId = show.Id });
                                                   if (show != set.Last())
                                                   {
                                                        @Html.Raw(", ");

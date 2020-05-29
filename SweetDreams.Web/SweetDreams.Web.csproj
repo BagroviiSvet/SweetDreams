@@ -328,6 +328,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminPageModel.cs" />
+    <Compile Include="Models\BuyTicketsModel.cs" />
     <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Models\FilmPageModel.cs" />
     <Compile Include="Models\HomePageModel.cs" />
@@ -335,7 +336,6 @@
     <Compile Include="Models\NavbarModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\ShowModel.cs" />
-    <Compile Include="Models\TicketModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +349,8 @@
     <Content Include="Views\Admin\AddFilm.cshtml" />
     <Content Include="Views\Admin\AddShow.cshtml" />
     <Content Include="Views\Home\Film.cshtml" />
+    <Content Include="Views\Home\Show.cshtml" />
+    <Content Include="Views\Account\Tickets.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

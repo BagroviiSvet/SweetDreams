@@ -1,0 +1,44 @@
+﻿@model SweetDreams.Web.Models.BuyTicketsModel
+
+@{
+     ViewBag.Title = Model.Show.Film.Name;
+     Layout = "~/Views/Shared/_LayoutNoHeader.cshtml";
+}
+<br />
+<br />
+<h2>@Model.Show.Film.Name</h2>
+<h4>Цена билета: @Model.Show.Price лей</h4>
+
+<div id="tickets">
+     <h4>@string.Format("{0} {1}", Model.Show.Date.ToString(@"dd\.mm\.yy"), Model.Show.Time.ToString(@"hh\:mm"))</h4>
+     <hr />
+     @using (Html.BeginForm("BuyTickets", "Home", new {@filmId = Model.Show.Film.Id, @showId = Model.Show.Id },FormMethod.Post))
+     {
+          <table>
+               <tr>
+                    <th></th>
+                    @for (int seat = 0; seat < 10; seat++)
+                    {
+                         <th>
+                              @(seat + 1)
+                         </th>
+                         }
+               </tr>
+               @for (int row = 0; row < 14; row++)
+               {
+                    <tr>
+                         <th>
+                              @(row+1)
+                         </th>
+                         @for (int seat = 0; seat < 10; seat++)
+                         { 
+                              <td>
+                                   <input type="checkbox" disabled="@Model.SelectedTickets[row,seat]" name="selectedTickets" value="@Model.TicketsId[row,seat]"/>
+                              </td>
+                         }
+                    </tr>
+               }
+          </table>
+          <button type="submit" class="btn btn-deep-orange">Купить билеты</button>
+     }
+</div>

@@ -1,4 +1,5 @@
 ﻿using SweetDreams.BusinessLogic;
+using SweetDreams.BusinessLogic.DataTransfer;
 using SweetDreams.BusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,31 +12,10 @@ namespace SweetDreams.Web.Controllers
      public abstract class BaseController : Controller
      {
           readonly BusinessLogic.BusinessLogic bl;
-
-          protected BaseController()
-          {
-               bl = new BusinessLogic.BusinessLogic();
-          }
-          protected IUserAPI UserAPI
-          {
-               get
-               {
-                    return bl.UserAPI;
-               }
-          }
-          protected ICinemaAPI CinemaAPI
-          {
-               get
-               {
-                    return bl.CinemaAPI;
-               }
-          }
-          protected IAdminAPI AdminAPI
-          {
-               get
-               {
-                    return bl.AdminAPI;
-               }
-          }
+          protected BaseController() => bl = new BusinessLogic.BusinessLogic();
+          protected IUserAPI UserAPI => bl.UserAPI;
+          protected ICinemaAPI CinemaAPI => bl.CinemaAPI;
+          protected IAdminAPI AdminAPI => bl.AdminAPI;
+          protected UserDTO LoggedUser => bl.UserAPI.GetUser(User.Identity.Name);
      }
 }

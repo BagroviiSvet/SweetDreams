@@ -16,6 +16,7 @@ namespace SweetDreams.DAL.Entities
           public int Id { get; set; }
           public DateTime Date { get; set; }
           public TimeSpan Time { get; set; }
+          public decimal Price { get; set; }
           public virtual Film Film { get; set; }
           public virtual ICollection<Ticket> Tickets { get; set; }
      }

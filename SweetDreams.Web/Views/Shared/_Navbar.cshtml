@@ -29,10 +29,17 @@
                                         Admin Page
                                    </a>
                               </li>
+                         } else
+                         {
+                              <li class="nav-item">
+                                   <a href="@Url.Action("Tickets", "Account")" class="nav-link waves-effect waves-light">
+                                        Мои билеты
+                                   </a>
+                              </li>
                          }
                          <li class="nav-item">
                               <a href="@Url.Action("Logout", "Account")" class="nav-link waves-effect waves-light">
-                                   Logout
+                                   Выйти из аккаунта
                               </a>
                          </li>
                     }
@@ -51,11 +58,6 @@
                               </a>
                          </li>
                     }
-                    <li class="nav-item">
-                         <a href="#search" class="nav-link waves-effect waves-light">
-                              <i class="fas fa-search"></i>
-                         </a>
-                    </li>
                </ul>
           </div>
      </div>
